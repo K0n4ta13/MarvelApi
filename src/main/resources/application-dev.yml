@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/marvel
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      platform: mysql
+      mode: always
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create-drop
+integration:
+  marvel:
+    public-key: 814570d63cf11c800c5f4d067516f46a
+    private-key: 476bfc152d3f9f4123dc7eff9b9a1b11e63a9425
+    base-path: http://gateway.marvel.com/v1/public
+security:
+  jwt:
+    expiration-in-minutes: 30
+    secret-key: U2FuYSB0ZSBhbW8gY2FzYXRlIGNvbm1pZ28sIHF1aWVybyBxdWUgdGVuZ2FzIG11Y2hvcyBoaWpvcyB5IHNlYW1vcyB2aWVqaXRvcyBqdW50b3M=
