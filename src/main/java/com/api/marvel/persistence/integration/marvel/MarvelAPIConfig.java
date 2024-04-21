@@ -1,5 +1,6 @@
 package com.api.marvel.persistence.integration.marvel;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ public class MarvelAPIConfig {
 
     private final PasswordEncoder md5Encoder;
 
-    public MarvelAPIConfig(PasswordEncoder md5Encoder) {
+    public MarvelAPIConfig(@Qualifier("md5Encoder") PasswordEncoder md5Encoder) {
         this.md5Encoder = md5Encoder;
     }
 
@@ -33,7 +34,7 @@ public class MarvelAPIConfig {
 
         securityQueryParams.put("ts", Long.toString(timestamp));
         securityQueryParams.put("apikey", publicKey);
-        securityQueryParams.put("hash", getHash());
+        securityQueryParams.put("hash",this.getHash());
 
         return securityQueryParams;
     }

@@ -24,6 +24,7 @@ public class RestTemplateService implements HttpClientService {
         String finalUrl = buildFinalUrl(endpoint, queryParams);
 
         HttpEntity httpEntity = new HttpEntity(getHeaders());
+        System.out.println("URL: " + finalUrl);
         ResponseEntity<T> response = this.restTemplate.exchange(finalUrl, HttpMethod.GET, httpEntity, responseType);
 
         if (response.getStatusCode().value() != HttpStatus.OK.value()) {
