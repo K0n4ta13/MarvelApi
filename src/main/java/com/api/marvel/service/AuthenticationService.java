@@ -3,11 +3,13 @@ package com.api.marvel.service;
 import com.api.marvel.dto.security.LoginRequest;
 import com.api.marvel.dto.security.LoginResponse;
 import com.api.marvel.persistence.entity.User;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -65,5 +67,17 @@ public class AuthenticationService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public UserDetails getUserLoggedIn() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(authentication instanceof UsernamePasswordAuthenticationToken)) {
+            throw new AuthenticationCredentialsNotFoundException("Authentication required");
+        }
+
+        UsernamePasswordAuthenticationToken authToken = (UsernamePasswordAuthenticationToken) authentication;
+
+        return (UserDetails) authToken.getPrincipal();
     }
 }
