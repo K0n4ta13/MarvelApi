@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
@@ -45,19 +44,14 @@ public class GlobalExceptionHandler {
             HttpServletRequest request,
             WebRequest webRequest)
     {
-        String message = null;
-
-        if (ex instanceof HttpClientErrorException.Forbidden) {
-            message = "You don´t have access to this resource";
-        } else if (ex instanceof HttpClientErrorException.Unauthorized) {
-            message = "You don't have sufficient permissions for this resource";
-        } else if (ex instanceof HttpClientErrorException.NotFound) {
-            message = "Resource don't exist";
-        } else if (ex instanceof HttpClientErrorException.Conflict) {
-            message = "Conflict in the request";
-        } else {
-            message = "An unexpected error occurred";
-        }
+        String message = switch (ex) {
+            case HttpClientErrorException.Forbidden forbidden -> "You don´t have access to this resource";
+            case HttpClientErrorException.Unauthorized unauthorized ->
+                    "You don't have sufficient permissions for this resource";
+            case HttpClientErrorException.NotFound notFound -> "Resource don't exist";
+            case HttpClientErrorException.Conflict conflict -> "Conflict in the request";
+            case null, default -> "An unexpected error occurred";
+        };
 
         ApiErrorDto errorDto = new ApiErrorDto(
                 message,

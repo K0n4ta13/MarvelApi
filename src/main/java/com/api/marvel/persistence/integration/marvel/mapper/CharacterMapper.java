@@ -16,9 +16,8 @@ public class CharacterMapper {
 
         List<CharacterDto> characters = new ArrayList<>();
 
-        resultsNode.elements().forEachRemaining(each -> {
-            characters.add(CharacterMapper.toDto(each));
-        });
+        resultsNode.elements()
+                .forEachRemaining(each -> characters.add(CharacterMapper.toDto(each)));
 
         return characters;
     }

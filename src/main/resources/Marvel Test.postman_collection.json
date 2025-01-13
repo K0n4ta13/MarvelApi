@@ -172,7 +172,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"mhernandez\",\r\n    \"password\":\"clave789\"\r\n}",
+					"raw": "{\r\n    \"username\":\"ramos\",\r\n    \"password\":\"clave789\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -282,7 +282,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"gcanas\",\r\n    \"password\":\"contrasena456\"\r\n}",
+					"raw": "{\r\n    \"username\":\"matunaga\",\r\n    \"password\":\"contrasena456\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

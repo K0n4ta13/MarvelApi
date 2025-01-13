@@ -34,7 +34,7 @@ public class MarvelAPIConfig {
 
         securityQueryParams.put("ts", Long.toString(timestamp));
         securityQueryParams.put("apikey", publicKey);
-        securityQueryParams.put("hash",this.getHash());
+        securityQueryParams.put("hash", getHash());
 
         return securityQueryParams;
     }
